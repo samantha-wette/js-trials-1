@@ -86,12 +86,42 @@ def truncate(string):
         if len(result) == 0 or char != result[-1]:
             result.append(char)
 
-    return result = "".join(result)
+    result = "".join(result)
+    return result
 
 
 def has_balanced_parens(string):
-    pass  # TODO: replace this line with your code
+    parens = 0
+
+    for char in string:
+        if char == "(":
+            parens += 1
+        elif char == ")":
+            parens -= 1
+
+            if parens < 0:
+                return False
+    return parens == 0
 
 
 def compress(string):
-    pass  # TODO: replace this line with your code
+    compressed = []
+    last_char = ' '
+    char_count = 0
+    for char in string:
+        if char != last_char:
+            compressed.append(last_char)
+
+            if char_count > 1:
+                compressed.append(str(char_count))
+
+            last_char = char
+            char_count = 0
+        
+        char_count += 1
+    
+    compressed.append(last_char)
+    if char_count > 1:
+        compressed.append(char_count)
+    
+    return "".join(compressed)
